@@ -42,6 +42,20 @@ La verdad no recuerdo mi respuesta anterior a esa pregunta, pero si es la de com
 4. **El tutorial de la Actividad 05 te llevó paso a paso. ¿Cómo te sentiste con ese método de aprendizaje? ¿Te dio seguridad o preferirías haberlo intentado por tu cuenta desde el principio?**
 Siento que esta bien, explica todo muy bien y me dio seguridad para comprender bien el tema y la realizacion de este. 
 
+## Actividad 9
+### Feedback 
+
+1. Continuar: ¿Qué actividad, video o ejemplo de esta unidad te resultó más inspirador o te ayudó más a entender el potencial de los sistemas físicos interactivos?
+
+Explorando los ejemplos vi una que me llamo la atencion, se llamaba [The messi experience](https://themessiexperience.com/es/), esta me gusto porque se veia una interaccion en tiempo real de la gente con la experiencia y me parecio muy interesante eso, poder realizar algo interactivo y didactico mediante la tecnologia y la programacion. 
+
+2. Dejar de hacer: ¿Hubo alguna parte que te pareció demasiado abstracta, muy rápida o confusa? ¿Hay algo que crees que podríamos cambiar para que sea más claro?
+
+Realmente no recuerdo ninguna parte en concreto, talvez la actividad de los circulos ya que fue el primer acercamiento real a crear arte generativo 
+
+3. Empezar a hacer: ¿Qué te genera más curiosidad ahora? ¿Te gustaría explorar más sensores del micro:bit (luz, temperatura), crear visualizaciones más complejas en p5.js o ver más ejemplos de proyectos artísticos?
+
+La verdad si suena interesante probar todo lo que nos puede ofrecer el microbit, y si estoy expectante para ver que mas vamos a realizar en el curso. Mas especificamente la parte de arte generativo. Tambien me gustaria ver la aplicacion de sistemas fisicos interactivos en videojuegos para entender mejor la aplicacion de estos.
 
 
 
