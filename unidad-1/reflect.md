@@ -30,16 +30,16 @@ En el p5.js se debe programar que lea el mensaje enviado por el microbit y cuand
 
 ### Parte 2: reflexión sobre tu proceso (Metacognición)
 
-1. ¿Qué fue más desafiante para ti en esta unidad: la parte conceptual?
+1. **¿Qué fue más desafiante para ti en esta unidad: la parte conceptual?**
 Para mi fue mas complicado la parte tecnica ya que al ser dos nuevos lenguajes pues siempre cuesta un poquito entenderlo al principio, y mas si toca conectarse entre estos dos.
 
-2. Describe el momento “¡Aha!” que tuviste cuando lograste que una acción en el micro:bit
+2. **Describe el momento “¡Aha!” que tuviste cuando lograste que una acción en el micro:bit**
 Diria que fue al momento de la realizacion de la actividad 6 ya que al ver que se movia el circulo si quede muy emocionado, entendi que no es tan complicado el hacer sistemas fisicos interactivos simples.
 
-3. Al inicio de la unidad te pregunté: “¿Este curso para qué me sirve?”. Después de experimentar y construir tu primer prototipo, ¿Cómo ha cambiado o se ha vuelto más concreta tu respuesta a esa pregunta?
+3. **Al inicio de la unidad te pregunté: “¿Este curso para qué me sirve?”. Después de experimentar y construir tu primer prototipo, ¿Cómo ha cambiado o se ha vuelto más concreta tu respuesta a esa pregunta?**
 La verdad no recuerdo mi respuesta anterior a esa pregunta, pero si es la de como me puede servir a nivel profesional siento que se podria enfocar mas a lo que es experiencias interactivas ya que al ser cosas tan didacticas siento que se pueden aplicar mejor eb ese enfasis.
 
-4. El tutorial de la Actividad 05 te llevó paso a paso. ¿Cómo te sentiste con ese método de aprendizaje? ¿Te dio seguridad o preferirías haberlo intentado por tu cuenta desde el principio?
+4. **El tutorial de la Actividad 05 te llevó paso a paso. ¿Cómo te sentiste con ese método de aprendizaje? ¿Te dio seguridad o preferirías haberlo intentado por tu cuenta desde el principio?**
 Siento que esta bien, explica todo muy bien y me dio seguridad para comprender bien el tema y la realizacion de este. 
 
 
