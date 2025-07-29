@@ -57,6 +57,13 @@ Realmente no recuerdo ninguna parte en concreto, talvez la actividad de los circ
 
 La verdad si suena interesante probar todo lo que nos puede ofrecer el microbit, y si estoy expectante para ver que mas vamos a realizar en el curso. Mas especificamente la parte de arte generativo. Tambien me gustaria ver la aplicacion de sistemas fisicos interactivos en videojuegos para entender mejor la aplicacion de estos.
 
+4. Balance inspiración vs. técnica: ¿Cómo sentiste el equilibrio entre ver los videos inspiradores de la Actividad 01 y la parte técnica de conectar las herramientas en las actividades 03-06?
+
+Sentí que hubo un buen equilibrio. Los videos de la Actividad 01 ayudaron a dar contexto, motivación y sentido al curso, mientras que las actividades 03-06 permitieron poner en práctica ese enfoque con herramientas concretas. Aunque la parte técnica fue un reto al principio, fue útil ver cómo todo se conectaba con el proposito de finalizar esta primera unidad.
+
+5. Comentario adicional: ¿Hay algo más que quieras compartir sobre tu experiencia en esta unidad introductoria?
+No tengo mas comentarios al respecto
+
 
 
      
