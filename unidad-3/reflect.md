@@ -27,3 +27,8 @@ Este contiene:
 
 Esta es una herramienta crucial para para verificar que todo este bien ya que verifica que las trancisiones funcionen correctamente, permite generar cambios de manera mas sencilla, ayuda a detectar errores y facilita el uso de pruebas automatizadas. 
 
+# Parte 2
+1. Me resulto mas desafiante traducir el codigo ya que siempre se me ha complicado un poco la parte de programar, mas con un lenguaje nuevo.
+2. 
+
+
