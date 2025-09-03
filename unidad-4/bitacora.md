@@ -90,23 +90,63 @@ function keyReleased() {
 Código modificado:
 
 ``` js
-// P_2_0_03_Microbit
-// Adaptación del sketch original para recibir datos de un micro:bit
-// y controlar el dibujo con un botón de conexión.
 
-// Variables para la conexión serie
 let port;
-let connectBtn;
-let connectionInitialized = false;
+let reader;
+let buffer = '';
 
-// Variables para el dibujo
-var strokeColor;
+let xValue = 0;
+let yValue = 0;
+let aState = false;
+let bState = false;
 
-// Variables para los datos del micro:bit
-var xValue = 0;
-var yValue = 0;
-var aState = false;
-var bState = false;
+const connectButton = document.getElementById('connectButton');
+
+connectButton.addEventListener('click', async () => {
+  try {
+    port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 115200 });
+
+    const decoder = new TextDecoderStream();
+    port.readable.pipeTo(decoder.writable);
+    const inputStream = decoder.readable;
+
+    reader = inputStream.getReader();
+
+    readLoop();
+
+    connectButton.disabled = true;
+    connectButton.textContent = "Conectado";
+  } catch (e) {
+    console.error('Error abriendo puerto serial:', e);
+  }
+});
+
+async function readLoop() {
+  let textBuffer = '';
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) {
+      reader.releaseLock();
+      break;
+    }
+    textBuffer += value;
+    let lines = textBuffer.split('\n');
+    textBuffer = lines.pop();
+
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      let parts = line.trim().split(',');
+      if (parts.length === 4) {
+        xValue = parseInt(parts[0]);
+        yValue = parseInt(parts[1]);
+        aState = parts[2].toLowerCase() === 'true';
+        bState = parts[3].toLowerCase() === 'true';
+      }
+    }
+  }
+}
 
 function setup() {
   createCanvas(720, 720);
@@ -114,95 +154,51 @@ function setup() {
   noFill();
   strokeWeight(2);
   strokeColor = color(0, 10);
-  background(0, 0, 100); // Fondo inicial blanco
-
-  // Funciones de conexión de p5.serial
-  port = createSerial();
-  connectBtn = createButton("Conectar a micro:bit");
-  connectBtn.position(width - 200, height - 50);
-  connectBtn.mousePressed(connectBtnClick);
-  
-  // Agregar un listener para recibir datos
-  // Corrección del error: se usa port.onData() en lugar de port.on()
-
-  console.log("Haz clic en 'Conectar a micro:bit' para iniciar.");
+  background(0, 0, 100);
 }
 
 function draw() {
-  // La lógica del botón en el bucle draw
-  if (!port.opened()) {
-    connectBtn.html("Conectar a micro:bit");
-  } else {
-    connectBtn.html("Desconectar");
-    
-    // El dibujo se activa si el micro:bit se mueve
-    if (abs(xValue) > 50 || abs(yValue) > 50) {
-      push();
-      translate(width / 2, height / 2);
+  if (aState || bState) {
+    push();
+    translate(width / 2, height / 2);
 
-      // Mapeo de los valores del micro:bit a las variables de dibujo
-      var circleResolution = int(map(yValue, -1024, 1024, 2, 20));
-      var radius = map(xValue, -1024, 1024, 50, width / 2);
+    let circleResolution = int(map(yValue + 1024, 0, 2048, 2, 10));
+    circleResolution = constrain(circleResolution, 2, 10);
 
-      var angle = TAU / circleResolution;
-      stroke(strokeColor);
+    let radius = map(xValue + 1024, 0, 2048, 0, width / 2);
 
-      beginShape();
-      for (var i = 0; i <= circleResolution; i++) {
-        var x = cos(angle * i) * radius;
-        var y = sin(angle * i) * radius;
-        vertex(x, y);
-      }
-      endShape();
-      pop();
+    let angle = TWO_PI / circleResolution;
+
+    stroke(strokeColor);
+
+    beginShape();
+    for (let i = 0; i <= circleResolution; i++) {
+      let x = cos(angle * i) * radius;
+      let y = sin(angle * i) * radius;
+      vertex(x, y);
     }
+    endShape();
+
+    pop();
   }
 }
 
-// Función que se llama cuando se reciben datos del puerto serie
-function serialEvent() {
-  // Leer la cadena completa hasta el salto de línea
-  let inString = port.readUntil('\n');
-  
-  if (inString.length > 0) {
-    inString = trim(inString);
-    let sensors = split(inString, ',');
-    
-    // Asigna los valores del micro:bit a las variables
-    if (sensors.length === 4) {
-      xValue = int(sensors[0]);
-      yValue = int(sensors[1]);
-      aState = (sensors[2] === 'True');
-      bState = (sensors[3] === 'True');
-      
-      // Control de borrado y color con los botones
-      if (aState) {
-          background(0, 0, 100);
-      }
-      if (bState) {
-          // Cambia el color del trazo con el botón B
-          let hue = map(xValue, -1024, 1024, 0, 360);
-          strokeColor = color(hue, 100, 71, 10);
-      }
-    }
-  }
+function keyReleased() {
+  if (keyCode === DELETE || keyCode === BACKSPACE) background(0, 0, 100);
+  if (key === 's' || key === 'S') saveCanvas('microbit-drawing', 'png');
+
+  if (key === '1') strokeColor = color(0, 10);
+  if (key === '2') strokeColor = color(192, 100, 64, 10);
+  if (key === '3') strokeColor = color(52, 100, 71, 10);
 }
 
-// Función de manejo del botón de conexión
-function connectBtnClick() {
-  if (!port.opened()) {
-    port.open("MicroPython", 115200);
-    connectionInitialized = false;
-  } else {
-    port.close();
-  }
-}
 
 ```
 
 ## Video
 
 [Video demostratativo](URL)
+
 
 
 
