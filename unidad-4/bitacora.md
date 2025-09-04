@@ -2,12 +2,12 @@
 
 ## Código
 
-[Enlace a la aplicación a modificar](https://editor.p5js.org/generative-design/sketches/P_2_0_03)
+[Enlace a la aplicación a modificar](https://editor.p5js.org/generative-design/sketches/P_2_0_02)
 
 Código a modificar:
 
 ``` js
-// P_2_0_03
+// P_2_0_02
 //
 // Generative Gestaltung – Creative Coding im Web
 // ISBN: 978-3-87439-902-9, First Edition, Hermann Schmidt, Mainz, 2018
@@ -35,20 +35,17 @@ Código a modificar:
  * drag                : draw
  *
  * KEYS
- * 1-3                 : stroke color
  * del, backspace      : erase
  * s                   : save png
  */
 'use strict';
 
-var strokeColor;
-
 function setup() {
   createCanvas(720, 720);
-  colorMode(HSB, 360, 100, 100, 100);
   noFill();
+  background(255);
   strokeWeight(2);
-  strokeColor = color(0, 10);
+  stroke(0, 25);
 }
 
 function draw() {
@@ -59,8 +56,6 @@ function draw() {
     var circleResolution = int(map(mouseY + 100, 0, height, 2, 10));
     var radius = mouseX - width / 2;
     var angle = TAU / circleResolution;
-
-    stroke(strokeColor);
 
     beginShape();
     for (var i = 0; i <= circleResolution; i++) {
@@ -75,13 +70,10 @@ function draw() {
 }
 
 function keyReleased() {
-  if (keyCode == DELETE || keyCode == BACKSPACE) background(0, 0, 100);
+  if (keyCode == DELETE || keyCode == BACKSPACE) background(255);
   if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
-
-  if (key == '1') strokeColor = color(0, 10);
-  if (key == '2') strokeColor = color(192, 100, 64, 10);
-  if (key == '3') strokeColor = color(52, 100, 71, 10);
 }
+
 
 ```
 
@@ -198,6 +190,7 @@ function keyReleased() {
 ## Video
 
 [Video demostratativo](URL)
+
 
 
 
