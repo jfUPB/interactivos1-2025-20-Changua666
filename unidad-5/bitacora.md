@@ -27,6 +27,22 @@ El protocolo usado entre el micro:bit y p5.js consiste en mensajes de texto en f
         }
 ```
 
+1. La linea port.availableBytes() > 0 → pregunta si hay datos esperando en el puerto serial.
+2. La linea port.readUntil("\n") → lee los datos hasta el salto de línea.
+3. La linea data.split(",") → separa los valores recibidos en un arreglo. El micro:bit está mandando 4 valores separados por comas.
+4. Los otros dos (values[2] y values[3]) son los estados de los botones A y B del micro:bit, convertidos en booleanos (true o false).
+
+### ¿Cómo se generan los eventos A pressed y B released que se generan en p5.js a partir de los datos que envía el micro:bit?
+
+El microbit envia true o false segun si el boton esta presionado o no, despues el skecth guarda el estado anterior en prevmicroBitAState y prevmicroBitBState.
+Para detectar el evento A pressed 
+```
+if (newAState === true && prevmicroBitAState === false)
+```
+Eso significa que si el boton esta suelto es false, y si esta presionado es true. y en ese momento se cambia lineModuleSize a un valor aleatorio, guarda la posicion actual del mouse e imprime A pressed. 
+Con el boton b es casi lo mismo, lo unico que cambia es que al presionar este se genera un nuevo color aleatorio e imprime B Pressed.
+
+
 
 
 
