@@ -63,3 +63,4 @@ Me aparece esto debido a que los datos se mandan como binario puro, no como text
 
 
 
+
