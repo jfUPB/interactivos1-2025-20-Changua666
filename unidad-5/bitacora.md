@@ -10,7 +10,7 @@ El protocolo usado entre el micro:bit y p5.js consiste en mensajes de texto en f
 
 ### Muestra y explica la parte del código de p5.js donde lee los datos del micro:bit y los transforma en coordenadas de la pantalla.
 
-´´´
+```
  if (port.availableBytes() > 0) {
       let data = port.readUntil("\n");
       if (data) {
@@ -25,7 +25,8 @@ El protocolo usado entre el micro:bit y p5.js consiste en mensajes de texto en f
         } else {
           print("No se están recibiendo 4 datos del micro:bit");
         }
-´´´
+```
+
 
 
 
