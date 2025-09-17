@@ -42,6 +42,10 @@ if (newAState === true && prevmicroBitAState === false)
 Eso significa que si el boton esta suelto es false, y si esta presionado es true. y en ese momento se cambia lineModuleSize a un valor aleatorio, guarda la posicion actual del mouse e imprime A pressed. 
 Con el boton b es casi lo mismo, lo unico que cambia es que al presionar este se genera un nuevo color aleatorio e imprime B Pressed.
 
+## Actividad 2
+
+
+
 
 
 
