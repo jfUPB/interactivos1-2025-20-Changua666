@@ -42,7 +42,20 @@ if (newAState === true && prevmicroBitAState === false)
 Eso significa que si el boton esta suelto es false, y si esta presionado es true. y en ese momento se cambia lineModuleSize a un valor aleatorio, guarda la posicion actual del mouse e imprime A pressed. 
 Con el boton b es casi lo mismo, lo unico que cambia es que al presionar este se genera un nuevo color aleatorio e imprime B Pressed.
 
+# Capturas
+
 ## Actividad 2
+# Captura 1
+<img width="1287" height="305" alt="Captura de pantalla 2025-09-17 145654" src="https://github.com/user-attachments/assets/fae0e7b9-4be4-4784-acb3-ad82d9876b00" />
+Me aparece esto debido a que los datos se mandan como binario puro, no como texto ASCII. Como los bytes que se transmiten no corresponden a caracteres legibles, algunos se ven con ese caracter de ?.
+
+# Captura 2 
+<img width="1330" height="220" alt="Captura de pantalla 2025-09-17 150331" src="https://github.com/user-attachments/assets/6812d267-0d34-4630-88bb-974b6937633a" />
+
+
+
+
+
 
 
 
