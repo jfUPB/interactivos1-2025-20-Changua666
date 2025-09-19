@@ -55,6 +55,13 @@ Cada mensaje que envía el programa ocupa 6 bytes, porque el formato '>2h2B' ind
 
 En el formato '>2h2B' los dos primeros valores (xValue y yValue) se guardan como enteros cortos con signo de 16 bits, por lo que pueden ser positivos o negativos. Los positivos aparecen en hexadecimal con ceros a la izquierda (por ejemplo, 100 se representa como 00 64), mientras que los negativos se convierten a su equivalente en complemento a dos (por ejemplo, -100 se representa como FF 9C). Los dos últimos valores (aState y bState) son enteros sin signo de 8 bits, que solo pueden tomar los valores 00 o 01, dependiendo de si los botones A y B están presionados o no. De esta forma, cada mensaje incluye exactamente seis bytes: dos para xValue, dos para yValue y uno para cada botón, donde los enteros reflejan tanto movimientos positivos como negativos del acelerómetro.
 
+# Captura 3 
+
+<img width="1464" height="357" alt="Captura de pantalla 2025-09-17 153506" src="https://github.com/user-attachments/assets/d32b3c46-7b40-42ed-b2b3-f59171e81734" />
+
+En el experimento se observa que los datos enviados en binario ocupan menos espacio y son más eficientes en términos de velocidad de transmisión, ya que cada valor numérico se representa directamente en bytes sin necesidad de convertirlo a caracteres. Sin embargo, tienen la desventaja de no ser legibles para las personas, lo que dificulta depurar o interpretar los mensajes sin herramientas adicionales. Por otro lado, el envío en ASCII resulta más claro y fácil de entender, ya que los valores aparecen en formato de texto legible, lo que facilita la verificación durante las pruebas; pero esta representación ocupa más bytes y puede hacer que la transmisión sea más lenta y menos eficiente en aplicaciones donde la velocidad y el ancho de banda son críticos.
+
+
 
 
 
