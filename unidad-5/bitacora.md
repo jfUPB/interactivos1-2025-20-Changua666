@@ -51,6 +51,9 @@ Me aparece esto debido a que los datos se mandan como binario puro, no como text
 
 # Captura 2 
 <img width="1330" height="220" alt="Captura de pantalla 2025-09-17 150331" src="https://github.com/user-attachments/assets/6812d267-0d34-4630-88bb-974b6937633a" />
+Cada mensaje que envía el programa ocupa 6 bytes, porque el formato '>2h2B' indica dos enteros cortos con signo de 16 bits (4 bytes en total) correspondientes a los valores del acelerómetro en los ejes X y Y, y dos enteros sin signo de 8 bits (2 bytes en total) que representan el estado de los botones A y B. En consecuencia, cada bloque de 6 bytes en el monitor serie contiene la información completa de una lectura: los primeros dos bytes codifican el valor de X, los siguientes dos el valor de Y, y los últimos dos reflejan si los botones están presionados o no.
+
+En el formato '>2h2B' los dos primeros valores (xValue y yValue) se guardan como enteros cortos con signo de 16 bits, por lo que pueden ser positivos o negativos. Los positivos aparecen en hexadecimal con ceros a la izquierda (por ejemplo, 100 se representa como 00 64), mientras que los negativos se convierten a su equivalente en complemento a dos (por ejemplo, -100 se representa como FF 9C). Los dos últimos valores (aState y bState) son enteros sin signo de 8 bits, que solo pueden tomar los valores 00 o 01, dependiendo de si los botones A y B están presionados o no. De esta forma, cada mensaje incluye exactamente seis bytes: dos para xValue, dos para yValue y uno para cada botón, donde los enteros reflejan tanto movimientos positivos como negativos del acelerómetro.
 
 
 
