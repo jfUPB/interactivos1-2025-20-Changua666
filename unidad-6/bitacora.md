@@ -14,4 +14,11 @@ Aparecio esto
 supongo que indica que se ejecuto alguna accion de el repositorio 
 
 **Describe lo que ves inicialmente en page1 y page2 en tu navegador.**
+Aparece un mensaje de que se estan conectando 
+
+**¿Qué mensajes aparecieron en la terminal del servidor cuando abriste page1 y page2?**
+Por lo que interpreto aparecen mensajes de el estado de las paginas (si estan sincronizadas, el tamaño de estas, etc) 
+
+
+
 
