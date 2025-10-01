@@ -9,3 +9,4 @@ En la unidad anterior era necesario usar delimitadores y un salto de línea porq
 
 En la unidad anterior los datos llegaban en formato ASCII, lo que obligaba a usar un salto de línea para detectar el fin del paquete y split para separar los valores, además de convertir cadenas de texto a números o booleanos. En cambio, en el código actual los datos llegan en binario con un tamaño fijo de 6 bytes, por lo que basta con leer esa cantidad exacta, acceder a cada campo por su posición en el buffer y convertirlos directamente a enteros o booleanos. Esto elimina la necesidad de delimitadores y conversiones, haciendo la transmisión más eficiente pero menos legible.
 
+
