@@ -56,5 +56,110 @@ El bucle draw() de p5.js redibuja la pantalla constantemente, lo cual es útil e
 
 Usar JavaScript en el cliente y en el servidor tiene una gran ventaja: permite que todo el proyecto esté en el mismo lenguaje. Eso significa que los desarrolladores no necesitan aprender tecnologías distintas para cada parte, pueden reutilizar código (por ejemplo, validaciones de formularios) tanto en el navegador como en el servidor, y el trabajo en equipo se vuelve más sencillo porque todos hablan el mismo “idioma”. Además, usar un solo lenguaje facilita el mantenimiento y reduce errores, ya que no hay que estar “traduciendo” lógica de un lenguaje a otro.
 
+## Actividad 5 
+Mi idea es un semaforo que en una pestaña aparezca y en la otra se controle, la hice porque me parecio sencillo y ya 
+
+Codigo server.js
+ ```
+// server.js
+const express = require("express");
+const app = express();
+const http = require("http").createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
+
+app.use(express.static("public"));
+
+io.on("connection", (socket) => {
+  console.log("Un usuario conectado");
+
+  socket.on("cambiarColor", (color) => {
+    // retransmitir el nuevo color a TODOS los clientes
+    io.emit("actualizarColor", color);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Usuario desconectado");
+  });
+});
+
+http.listen(3000, () => {
+  console.log("Servidor corriendo en http://localhost:3000");
+});
+```
+
+Codigo control html
+
+```
+// server.js
+const express = require("express");
+const app = express();
+const http = require("http").createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
+
+app.use(express.static("public"));
+
+io.on("connection", (socket) => {
+  console.log("Un usuario conectado");
+
+  socket.on("cambiarColor", (color) => {
+    // retransmitir el nuevo color a TODOS los clientes
+    io.emit("actualizarColor", color);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Usuario desconectado");
+  });
+});
+
+http.listen(3000, () => {
+  console.log("Servidor corriendo en http://localhost:3000");
+});
+```
+
+Codigo visor html 
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visor de Semáforo</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    #semaforo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: gray;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Semáforo</h1>
+  <div id="semaforo"></div>
+
+  <script>
+    const socket = io();
+    const semaforo = document.getElementById("semaforo");
+
+    socket.on("actualizarColor", (color) => {
+      semaforo.style.background = color;
+    });
+  </script>
+</body>
+</html>
+```
+
+Los hosts son 
+```
+http://localhost:3000/control.html
+```
+y 
+```
+http://localhost:3000/visor.html
+```
+
+
 
 
