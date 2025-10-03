@@ -56,6 +56,49 @@ El bucle draw() de p5.js redibuja la pantalla constantemente, lo cual es útil e
 
 Usar JavaScript en el cliente y en el servidor tiene una gran ventaja: permite que todo el proyecto esté en el mismo lenguaje. Eso significa que los desarrolladores no necesitan aprender tecnologías distintas para cada parte, pueden reutilizar código (por ejemplo, validaciones de formularios) tanto en el navegador como en el servidor, y el trabajo en equipo se vuelve más sencillo porque todos hablan el mismo “idioma”. Además, usar un solo lenguaje facilita el mantenimiento y reduce errores, ya que no hay que estar “traduciendo” lógica de un lenguaje a otro.
 
+
+## Actividad 3 
+### Punto 1 
+Me aparece esto al entrar a page1
+<img width="1920" height="1020" alt="Captura de pantalla 2025-10-03 112059" src="https://github.com/user-attachments/assets/1519014e-f3f6-4763-a041-5f14982c8b15" />
+y al entrar a pagina uno me aparece esto
+<img width="958" height="787" alt="Captura de pantalla 2025-10-03 112207" src="https://github.com/user-attachments/assets/5407a04b-cbcd-4f3f-a496-f1eb0c210ca9" />
+no funciona porque no se conecta 
+
+### punto 2 
+Al entrar en las paginas se crean unos IDs, diferentes por paginas:
+<img width="568" height="309" alt="Captura de pantalla 2025-10-03 112516" src="https://github.com/user-attachments/assets/e4d7be53-1866-46e3-b22f-48cf6877fe54" />
+y al salir de las paginas el server lo reconoce como una desconexión de este asi que usa el mismo id para indicar que se cerro la pagina:
+<img width="454" height="70" alt="Captura de pantalla 2025-10-03 112615" src="https://github.com/user-attachments/assets/0ac6a63c-1c2a-4010-8d6a-9b9c778f6f43" />
+
+### Punto 3 
+<img width="590" height="452" alt="image" src="https://github.com/user-attachments/assets/a538383c-8a12-4f7a-ba82-205885de999a" />
+Qué pasa:
+
+socket.emit envía el mensaje solo al mismo socket que lo emitió.
+Entonces, si mueves page1, solo page1 recibe los datos.
+page2 no se actualiza, porque socket.emit no envía a los demás clientes.
+Por qué no se actualiza en page2:
+
+broadcast.emit envía a todos los demás clientes conectados, excepto al que emitió el mensaje.
+socket.emit envía únicamente al cliente actual (el que movió la ventana).
+¿Qué te dice esto sobre cómo el servidor asocia URLs con respuestas? Restaura el código.
+
+El servidor solo responde a las URLs que tú defines en app.get(). Si pones /page1, funciona solo con /page1.
+Si lo cambias a /pagina_uno, funciona solo con /pagina_uno.
+El servidor no “adivina” ni busca archivos, solo hace lo que le dices en el código.
+
+### Punto 4 
+Al cambiar el puerto del server, sale lo siguiente al iniciar el este mismo:
+<img width="490" height="120" alt="496916081-bbb730f5-a065-457f-8b75-8cd8784e7341" src="https://github.com/user-attachments/assets/da935749-567a-47fa-90ef-f71990e9bfcb" />
+Al abrir http://localhost:3000/page1 sale esto:
+<img width="1920" height="1020" alt="Captura de pantalla 2025-10-03 112958" src="https://github.com/user-attachments/assets/6eaa220a-6ac8-4b68-9c54-984c2de58a9b" />
+¿Qué aprendiste sobre la variable port y la función listen? Restaura el puerto a 3000.
+
+Aprendí que La variable port define el número de puerto en el que el servidor escucha conexiones y fa función server.listen(port) arranca el servidor en ese puerto específico al cambiar el puerto cambia la URL que los clientes deben usar para conectarse.
+
+Si intento conectarme a un puerto donde no hay servidor escuchando, no funciona.
+
 ## Actividad 5 
 Mi idea es un semaforo que en una pestaña aparezca y en la otra se controle, la hice porque me parecio sencillo y ya 
 
@@ -161,6 +204,12 @@ http://localhost:3000/visor.html
 ```
 Video Demostrativo 
 [Video](https://youtu.be/IiMqZXyirn8)
+
+## Autoevaluación
+al cumplir perfectamente con 4 de las 5 actividades, yo considero que merezco un 4, ya que, todas las actividades estan bien explicadas y realizadas, bien resueltas y justificadas, por lo tanto la nota que considero pertinente es un 4. 
+
+TOTAL: 4.0
+
 
 
 
