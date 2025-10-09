@@ -21,3 +21,10 @@ En el computador aparece esto
 En el celular aparece esto 
 <img width="739" height="1600" alt="image" src="https://github.com/user-attachments/assets/62e977a0-10f7-4721-a4a3-354ad0965224" />
 y al tocar el touch de mi celular se mueve la bola que aparece en la pantalla del computador, yo no observo un delay visible pero me imagino que tiene un poco de delay. 
+
+## Actividad 2 
+### Explica con tus propias palabras: ¿Por qué es necesario Dev Tunnels en este escenario y cómo funciona conceptualmente?
+Dev Tunnels es necesario porque el servidor corre en localhost, que solo el computador puede ver.
+Con Dev Tunnels, se crea una URL pública que actúa como un puente seguro entre Internet y el servidor local.
+Así, el celular (u otros dispositivos) pueden conectarse al servidor aunque no estén en la misma red.
+
