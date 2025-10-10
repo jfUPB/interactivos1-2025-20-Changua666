@@ -76,5 +76,12 @@ Reduce tráfico y evita efectos de duplicación/eco.
 
 
 
+### Si conectaras dos computadores de escritorio y un móvil a este servidor, y movieras el dedo en el móvil, ¿Quién recibiría el mensaje retransmitido por el servidor? ¿Por qué?
+
+Si se conectaran dos computadores de escritorio y un celular al server, y se moviera el dedo en el celular, solo los dos computadores de escritorio recibirian el mensaje retransmitido.
+
+Esto sucede porque el server usa socket.broadcast.emit(), que envia el mensaje a todos los clientes que esten conectados excepto al que lo envio. En este caso, el celular fue el emisor (ya quqe detecto el toque y envio el mensaje), por lo tanto, no recibe su propio mensaje de vuelta. Los otros dispositivos si lo reciben, porque estan conectados al mismo server y no fueron quienes originaron ese evento.
+
+### ¿Qué información útil te proporcionan los mensajes console.log en el servidor durante la ejecución?
 
 
