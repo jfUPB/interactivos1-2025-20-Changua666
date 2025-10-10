@@ -54,6 +54,27 @@ La funcion express.static(‘public’) permite que el servidor comparta de mane
 1) Que evento lo envia desde el celular ?
 En el cliente movil (p5.js) el evento que detecta el movimiento en la pantalla tactil suele ser touchmoved() (o touchStarted() ). Dentro de esa funcion se crea un payload con las coordenadas y se envia al server con socket.emit(...)
 
+2) ¿Qué evento lo recibe el servidor?
+En el servidor Node.js + Socket.IO se recibe con socket.on('message', ...) (el mismo nombre de evento que usó el móvil).
+
+3) ¿Qué hace el servidor con él?
+El servidor hace lo tipico, valida la informacion, añade metadatos, guarda un log, lo reenvia.
+
+4) ¿Qué evento lo envía el servidor al escritorio?
+El servidor emite otro evento hacia los clientes. El escritorio (stage) tiene un listener socket.on('message', ...) que recibe ese paquete y actualiza en tiempo real lo que pasa en pantalla
+
+5) Por qué se usa socket.broadcast.emit en lugar de io.emit o socket.emit?
+- socket.emit(...) envía solo al emisor (la misma conexión).
+No sirve aquí porque el objetivo es notificar a otros clientes, no de nuevo al que ya envió el toque.
+
+- io.emit(...) envía a todos los sockets conectados, incluyendo al que generó el evento.
+Si se usa io.emit, el cliente que tocó recibirá su propio mensaje de vuelta. Eso puede provocar eco visual/sonoro o duplicación de la acción (el toque ya fue procesado localmente en el móvil, luego vuelve con latencia y se procesa otra vez).
+
+- socket.broadcast.emit(...) envía a todos los demás excepto al emisor.
+Es la opción indicada cuando el emisor ya aplicó el efecto localmente y solo quieres que los demás vean esa acción en tiempo real.
+Reduce tráfico y evita efectos de duplicación/eco.
+
+
 
 
 
