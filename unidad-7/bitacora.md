@@ -12,7 +12,9 @@ npm install instala las dependencias que necesita el repo para poder funcionar y
 ### ¿Qué mensajes observaste en la terminal del servidor al conectar el cliente de escritorio y el cliente móvil? ¿Eran diferentes los mensajes o identificadores?
 
 Al conectar el cliente del escritorio y el cliente movil me aparecio esto 
+
 <img width="573" height="187" alt="image" src="https://github.com/user-attachments/assets/2b470e79-9ea1-4f49-b609-1e341859f357" />
+
 Yo veo que los dos mensajes son iguales 
 
 ### Describe el comportamiento observado: ¿Funcionó la interacción? ¿Hubo algún retraso (latencia)?
@@ -83,5 +85,6 @@ Si se conectaran dos computadores de escritorio y un celular al server, y se mov
 Esto sucede porque el server usa socket.broadcast.emit(), que envia el mensaje a todos los clientes que esten conectados excepto al que lo envio. En este caso, el celular fue el emisor (ya quqe detecto el toque y envio el mensaje), por lo tanto, no recibe su propio mensaje de vuelta. Los otros dispositivos si lo reciben, porque estan conectados al mismo server y no fueron quienes originaron ese evento.
 
 ### ¿Qué información útil te proporcionan los mensajes console.log en el servidor durante la ejecución?
+
 
 
