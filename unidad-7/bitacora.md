@@ -87,4 +87,18 @@ Esto sucede porque el server usa socket.broadcast.emit(), que envia el mensaje a
 ### ¿Qué información útil te proporcionan los mensajes console.log en el servidor durante la ejecución?
 
 
+## Actividad 5 
+Mi idea es hacer un visual basado en esta portada de este album 
+<img width="300" height="300" alt="Charli_XCX_-_Brat_album_cover" src="https://github.com/user-attachments/assets/394ee9df-e648-4ed0-add8-b9a223961f98" />
+Entonces se me ocurrio representarlo con 2 cosas: 
+- 4 tipos de ecualizadores a los que se les puede ajustar la intesidad:
+  - Unas barras verticales sencillas, cada color representa un tono: Los bajos son blancos, los medios negros y los agudos son verdes
+  - Un circulo que tambien toma los distintos tonos: Los bajos son los puntos cerca del espectro, los medios y agudos estan mas adelante
+  - Una onda lateral tipo montaña que tambien toma los distintos tonos
+  - Unos visualizadores con forma cuadrada que toman las distintas frecuencias
+- 4 gifs que representan esa energia caotica y divertida del album que tambien se pueden cambiar. 
+
+
+
+
 
