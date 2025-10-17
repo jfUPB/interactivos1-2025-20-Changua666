@@ -87,6 +87,11 @@ Esto sucede porque el server usa socket.broadcast.emit(), que envia el mensaje a
 ### ¿Qué información útil te proporcionan los mensajes console.log en el servidor durante la ejecución?
 
 
+## Actividad 4
+![Sin título (1)](https://github.com/user-attachments/assets/fa1abbc3-ffdf-4cce-8b22-c4a4b6baff82)
+
+
+
 ## Actividad 5 
 Mi idea es hacer un visual basado en esta portada de este album 
 <img width="300" height="300" alt="Charli_XCX_-_Brat_album_cover" src="https://github.com/user-attachments/assets/394ee9df-e648-4ed0-add8-b9a223961f98" />
@@ -467,7 +472,8 @@ function windowResized() {
 ```
 
 ### Autoevaluación 
-Yo considero que mi nota es 5, ya que tengo todas las actividades propuestas realizadas y el apply funcional con los requisitos propuestos
+Yo considero que mi nota es 4,7 , ya que tengo todas las actividades propuestas realizadas, solo me falto una parte de la actividad 3 y el apply funcional con los requisitos propuestos
+
 
 
 
