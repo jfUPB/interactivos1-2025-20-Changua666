@@ -96,7 +96,376 @@ Entonces se me ocurrio representarlo con 2 cosas:
   - Un circulo que tambien toma los distintos tonos: Los bajos son los puntos cerca del espectro, los medios y agudos estan mas adelante
   - Una onda lateral tipo montaña que tambien toma los distintos tonos
   - Unos visualizadores con forma cuadrada que toman las distintas frecuencias
-- 4 gifs que representan esa energia caotica y divertida del album que tambien se pueden cambiar. 
+- 4 gifs que representan esa energia caotica y divertida del album que tambien se pueden cambiar.
+
+### Codigo Server.js
+```
+
+const express = require('express');
+const http = require('http');
+const socketio = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+const port = 3000;
+
+
+app.use(express.static('public')); 
+
+io.on('connection', (socket) => {
+    console.log('Un cliente se ha conectado:', socket.id);
+
+    
+    socket.on('touchData', (data) => {
+       
+        socket.broadcast.emit('visualControl', data); 
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Cliente desconectado:', socket.id);
+    });
+});
+
+
+server.listen(port, () => {
+    console.log(`Server is listening on http://localhost:${port}/`);
+});
+```
+
+### Cliente desktop  
+```
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visuales Desktop</title>
+
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+
+  
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="sketch.js"></script>
+  </body>
+</html>
+
+```
+
+### Cliente Mobile 
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Visuals Mobile Control</title>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #8ace00; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="sketch.js"></script> 
+</body>
+</html>
+```
+
+### Sketch Desktop
+```
+let socket;
+let mobileIntensity = 1; 
+let mobileMode = 1;      
+let mobileGif = 0;       
+
+let song, fft;
+let gifImgs = [];
+let audioStarted = false; 
+
+
+function preload() {
+    song = loadSound('../assets/club-classics.mp3');
+    gifImgs[0] = loadImage('../assets/pickle-rick-dance.gif');
+    gifImgs[1] = loadImage('../assets/choerry-dance.gif');
+    gifImgs[2] = loadImage('../assets/yoonchae-dance.gif');
+    gifImgs[3] = loadImage('../assets/shaq.gif');
+}
+
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    noStroke();
+    fft = new p5.FFT();
+    textAlign(CENTER, CENTER);
+    textSize(18);
+    
+    
+    socket = io.connect(window.location.origin);
+    
+   
+    socket.on('visualControl', (data) => {
+        mobileMode = data.newMode;
+        mobileGif = data.newGif;
+        mobileIntensity = data.newIntensity;
+    });
+}
+
+
+function mousePressed() {
+    // 1. Intentar iniciar/reanudar el AudioContext del navegador
+    userStartAudio(); 
+    
+   
+    if (getAudioContext().state !== 'suspended' && !audioStarted && song.isLoaded()) {
+        song.loop();
+        audioStarted = true; // Marcar como iniciado
+        console.log("AudioContext reanudado y música iniciada por clic.");
+    }
+}
+
+
+function draw() {
+    background(138, 206, 0); // Fondo BRAT Verde
+    let spectrum = fft.analyze();
+    let intensity = mobileIntensity; 
+
+    
+    let low = spectrum.slice(0, spectrum.length / 3);
+    let mid = spectrum.slice(spectrum.length / 3, (2 * spectrum.length) / 3);
+    let high = spectrum.slice((2 * spectrum.length) / 3);
+
+   
+    if (mobileMode === 1) { 
+        drawSpectrumBars(low, mid, high, intensity);
+    } else if (mobileMode === 2) {
+        drawCircleSpectrum(spectrum, intensity);
+    } else if (mobileMode === 3) {
+        drawTriangleSpectrum(spectrum, intensity);
+    } else if (mobileMode === 4) {
+        drawSquareSpectrum(spectrum, intensity);
+    }
+
+  
+    if (gifImgs[mobileGif]) { 
+        imageMode(CENTER);
+        image(gifImgs[mobileGif], width / 2, height / 2, 300, 300);
+    }
+
+    fill(0);
+    text('brat', width / 2, 40);
+    text('Intensidad de las visuales: ' + intensity.toFixed(1), width / 2, 70);
+    text('Modo: ' + mobileMode + ' | GIF: ' + mobileGif, width / 2, 100); 
+    
+    
+    if (!audioStarted) {
+        text('CLIC EN LA PANTALLA PARA INICIAR LA MÚSICA (me toco hacer eso porque no vi mas solucion porfa profe no me raje)', width / 2, height - 50);
+    }
+}
+
+
+function drawSpectrumBars(low, mid, high, intensity) {
+    drawSpectrum(low, color(255, 255, 255), intensity);
+    drawSpectrum(mid, color(0), intensity);
+    drawSpectrum(high, color(138, 206, 0), intensity);
+}
+
+function drawSpectrum(spectrum, c, intensity) {
+    fill(c);
+    let step = 15;
+    let bandWidth = (width / (spectrum.length / step)) * 0.8;
+    for (let i = 0; i < spectrum.length; i += step) {
+        let x = map(i, 0, spectrum.length, 0, width);
+        let h = -height + map(spectrum[i] * intensity, 0, 255, height, 0);
+        rect(x, height, bandWidth, h, 5);
+    }
+}
+
+function drawCircleSpectrum(spectrum, intensity) {
+    noFill();
+    strokeWeight(3);
+    stroke(0);
+    push();
+    translate(width / 2, height / 2);
+    beginShape();
+    for (let i = 0; i < spectrum.length; i += 10) {
+        let angle = map(i, 0, spectrum.length, 0, TWO_PI);
+        let r = map(spectrum[i] * intensity, 0, 255, 150, 400);
+        let x = r * cos(angle);
+        let y = r * sin(angle);
+        vertex(x, y);
+    }
+    endShape(CLOSE);
+    pop();
+    noStroke();
+}
+
+function drawTriangleSpectrum(spectrum, intensity) {
+    fill(0);
+    noStroke();
+    beginShape();
+    for (let i = 0; i < spectrum.length; i += 8) {
+        let x = map(i, 0, spectrum.length, 0, width);
+        let y = height / 2 + map(spectrum[i] * intensity, 0, 255, 100, -100);
+        vertex(x, y);
+    }
+    vertex(width, height);
+    vertex(0, height);
+    endShape(CLOSE);
+}
+
+function drawSquareSpectrum(spectrum, intensity) {
+    fill(0);
+    let step = 25;
+    for (let i = 0; i < spectrum.length; i += step) {
+        let x = map(i, 0, spectrum.length, 0, width);
+        let size = map(spectrum[i] * intensity, 0, 255, 10, 120);
+        rect(x, height / 2 - size / 2, size, size);
+    }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+```
+
+### Sketch Mobile 
+```
+let socket;
+
+
+let currentMode = 1; 
+let currentGif = 0;
+let intensitySlider; 
+
+
+let modeButtons = [];
+let gifButtons = [];
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(138, 206, 0); 
+    
+    socket = io.connect(window.location.origin);
+
+    const padding = 20; 
+    const spacing = 10; 
+    const buttonHeight = 50;
+    const buttonWidth = (width - 3 * padding) / 2;
+    
+   
+    let currentY = padding; 
+    let modeLabels = ['1: BARRAS', '2: CÍRCULO', '3: TRIÁNGULO', '4: CUADRADO'];
+    
+    for (let i = 0; i < 4; i++) {
+        let x = padding + (i % 2) * (buttonWidth + padding);
+        let y = currentY + floor(i / 2) * (buttonHeight + spacing);
+        
+        let button = createButton(modeLabels[i]);
+        button.size(buttonWidth, buttonHeight);
+        button.position(x, y);
+        button.mousePressed(() => {
+            currentMode = i + 1;
+            updateButtonStyles(modeButtons, currentMode);
+            sendControlData();
+        });
+        modeButtons.push(button);
+    }
+    
+   
+   
+    currentY += 2 * (buttonHeight + spacing) + spacing; 
+    let gifLabels = ['PICKLE RICK', 'CHOERRY', 'YOONCHAE', 'SHAQ'];
+    
+    for (let i = 0; i < 4; i++) {
+        let x = padding + (i % 2) * (buttonWidth + padding);
+        let y = currentY + floor(i / 2) * (buttonHeight + spacing);
+        
+        let button = createButton(gifLabels[i]);
+        button.size(buttonWidth, buttonHeight);
+        button.position(x, y);
+        button.mousePressed(() => {
+            currentGif = i;
+            updateButtonStyles(gifButtons, currentGif);
+            sendControlData();
+        });
+        gifButtons.push(button);
+    }
+    
+   
+    currentY += 2 * (buttonHeight + spacing) + padding; 
+
+    intensitySlider = createSlider(0.5, 5.0, 1.0, 0.1);
+    intensitySlider.style('width', (width - 2 * padding) + 'px');
+    intensitySlider.position(padding, currentY);
+    intensitySlider.input(sendControlData);
+    
+   
+    updateButtonStyles(modeButtons, currentMode);
+    updateButtonStyles(gifButtons, currentGif);
+    
+    sendControlData();
+}
+
+function draw() {
+    background(138, 206, 0);
+    fill(0);
+    textAlign(LEFT, TOP);
+    textSize(18);
+    // Mostrar información de intensidad junto al slider
+    text('INTENSIDAD: ' + intensitySlider.value().toFixed(1), intensitySlider.x, intensitySlider.y + intensitySlider.height + 5);
+}
+
+
+
+function updateButtonStyles(buttonsArray, activeValue) {
+    buttonsArray.forEach((btn, index) => {
+        let value = (buttonsArray === modeButtons) ? (index + 1) : index;
+        if (value === activeValue) {
+            btn.style('background-color', '#000');
+            btn.style('color', '#8ace00');
+            btn.style('border', '3px solid #000');
+        } else {
+            btn.style('background-color', '#f0f0f0');
+            btn.style('color', '#000');
+            btn.style('border', '2px solid #000');
+        }
+    });
+}
+
+function sendControlData() {
+    let data = {
+        newMode: currentMode,
+        newGif: currentGif,
+        newIntensity: intensitySlider.value()
+    };
+    socket.emit('touchData', data);
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+```
+
 
 
 
