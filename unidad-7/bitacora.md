@@ -466,6 +466,9 @@ function windowResized() {
 }
 ```
 
+### Autoevaluación 
+Yo considero que mi nota es 5, ya que tengo todas las actividades propuestas realizadas y el apply funcional con los requisitos propuestos
+
 
 
 
