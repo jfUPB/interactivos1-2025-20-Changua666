@@ -14,6 +14,10 @@ un boceto inicial que tuve del controlador del celular fue este
 
 Pero ya despues deicidi que era mejor tener el controlador de intesidad con los botones a y b del microbit y lo descarte
 
+# Diagrama 
+<img width="1021" height="604" alt="image" src="https://github.com/user-attachments/assets/3f81c4fe-fd2a-4967-81b9-99a3ef5b7e8a" />
+
+
 
 
 
