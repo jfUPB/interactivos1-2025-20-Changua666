@@ -3,6 +3,7 @@
 
 ## Actividad 1 
 Para el diseño de la actividad me base en dos cosas, las visuales que usa el artista rusowsky en sus conciertos, y en la portada de su album "DAISY" 
+
 <img width="610" height="610" alt="image" src="https://github.com/user-attachments/assets/d67642a5-ecc0-45d6-8d5c-204a891a32d4" />
 
 Las visuales que quiero crear son un gif que aparece en la mitad, unas visualizadores del sonido detras de este (en el fondo) y con el microbit quiero poder controlar la intensidad de las visuales de atras mediante los botones a y b.
@@ -27,6 +28,7 @@ ya con esta base de sketch, me propuse a crear la conexion con el celular, el ch
 
 Ya despues hice la conexion con el microbit, que si fue mas luchada.
 Primero le explique a la ia lo que queria hacer y le mande unos codigos de ejemplo de unidades anteriores, despues de eso por alguna razon no me aparecia nada en la pantalla del celular y si me toco corregir eso manualmente, despues de eso me di cuenta de que al darle click no se conectaba el microbit y literlamente estuve 1 hora tratando de solucionar eso con chagpt 
+
 
 
 
