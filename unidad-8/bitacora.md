@@ -562,6 +562,10 @@ function windowResized() {
 }
 ```
 
+## Autoevaluacion
+Yo considero que mi autoevaluacion seria un 4.5 ya que hice todos los puntos funcionales y completos menos el diagrama, de resto todo esta bien.
+
+
 
 
 
